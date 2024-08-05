@@ -63,3 +63,17 @@ func (dto *CreateBookDTO) ToBook() *Book {
 		Year:   dto.Year,
 	}
 }
+
+// ValidateBookData validates book data before persistence
+func (b *Book) ValidateBookData() error {
+	if b.Title == "" {
+		return ErrInvalidTitle
+	}
+	if b.Author == "" {
+		return ErrInvalidAuthor
+	}
+	if b.Year < 1000 || b.Year > 2034 {
+		return ErrInvalidYear
+	}
+	return nil
+}

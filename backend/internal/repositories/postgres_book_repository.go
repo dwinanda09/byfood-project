@@ -2,19 +2,25 @@ package repositories
 
 import (
 	"context"
+	"database/sql"
 
 	"byfood-library/internal/domain/entities"
 	"byfood-library/internal/domain/repositories"
 	"github.com/google/uuid"
 	"github.com/jmoiron/sqlx"
+	"go.uber.org/zap"
 )
 
 type postgresBookRepository struct {
-	db *sqlx.DB
+	db     *sqlx.DB
+	logger *zap.Logger
 }
 
-func NewPostgresBookRepository(db *sqlx.DB) repositories.BookRepository {
-	return &postgresBookRepository{db: db}
+func NewPostgresBookRepository(db *sqlx.DB, logger *zap.Logger) repositories.BookRepository {
+	return &postgresBookRepository{
+		db:     db,
+		logger: logger,
+	}
 }
 
 // Create using named parameters and struct scanning
@@ -45,7 +51,11 @@ func (r *postgresBookRepository) GetByID(ctx context.Context, id uuid.UUID) (*en
 	var book entities.Book
 	err := r.db.GetContext(ctx, &book, query, id)
 	if err != nil {
-		return nil, entities.ErrBookNotFound
+		if err == sql.ErrNoRows {
+			return nil, entities.ErrBookNotFound
+		}
+		r.logger.Error("Database error getting book by ID", zap.String("id", id.String()), zap.Error(err))
+		return nil, entities.ErrDatabaseError
 	}
 	return &book, nil
 }

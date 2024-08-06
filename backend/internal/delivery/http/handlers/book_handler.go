@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"byfood-library/internal/domain/entities"
+	"byfood-library/internal/middleware"
 	"byfood-library/internal/usecases"
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
@@ -32,15 +33,21 @@ func NewBookHandler(bookUseCase usecases.BookUseCase, logger *zap.Logger) BookHa
 // @Router /books [get]
 func (h *bookHandler) GetBooks(c echo.Context) error {
 	ctx := c.Request().Context()
+	requestID := middleware.GetRequestID(c)
+	ctx = middleware.WithRequestID(ctx, requestID)
+	
+	h.logger.Info("Getting all books", zap.String("request_id", requestID))
+	
 	books, err := h.bookUseCase.GetAllBooks(ctx)
 	if err != nil {
-		h.logger.Error("Failed to get all books", zap.Error(err))
+		h.logger.Error("Failed to get all books", zap.String("request_id", requestID), zap.Error(err))
 		return c.JSON(http.StatusInternalServerError, ErrorResponse{
 			Error:   "Failed to retrieve books",
 			Message: err.Error(),
 		})
 	}
 
+	h.logger.Info("Successfully retrieved all books", zap.String("request_id", requestID), zap.Int("count", len(books)))
 	return c.JSON(http.StatusOK, books)
 }
 

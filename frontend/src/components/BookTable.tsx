@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { useBooks } from '../contexts/BookContext';
 import BookModal from './BookModal';
 import { Book } from '../types/book';
@@ -41,7 +41,7 @@ const BookTable: React.FC = () => {
     );
   };
 
-  const formatDate = (dateString: string | undefined) => {
+  const formatDate = useCallback((dateString: string | undefined) => {
     if (!dateString) return 'N/A';
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -50,7 +50,12 @@ const BookTable: React.FC = () => {
       hour: '2-digit',
       minute: '2-digit',
     });
-  };
+  }, []);
+
+  // Memoized sort icon component for performance
+  const sortIcon = useMemo(() => {
+    return (field: keyof Book) => getSortIcon(field);
+  }, [sortBy, sortOrder]);
 
   const handleView = (book: Book) => {
     setSelectedBook(book);

@@ -2,7 +2,7 @@
 
 A comprehensive, production-ready library management system built with Clean Architecture principles, featuring a modern Go backend and React frontend.
 
-## 🚀 Features
+## Features
 
 ### Backend (Go + Echo)
 - **Clean Architecture**: Domain-driven design with clear separation of concerns
@@ -34,7 +34,7 @@ A comprehensive, production-ready library management system built with Clean Arc
 - **Health Checks**: Application and container health monitoring
 - **Resource Management**: Memory and CPU limits for efficient scaling
 
-## 🏗️ Architecture
+## Architecture
 
 ### Clean Architecture Implementation
 ```
@@ -72,7 +72,7 @@ A comprehensive, production-ready library management system built with Clean Arc
 └─────────────────────────────────────────────────────────────┘
 ```
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 ### Backend
 - **Go 1.21+**: High-performance, statically typed language
@@ -99,14 +99,14 @@ A comprehensive, production-ready library management system built with Clean Arc
 - **Grafana**: Monitoring and visualization
 - **PostgreSQL**: Persistent data storage with named volumes
 
-## 📋 Prerequisites
+## Prerequisites
 
 - **Docker**: 20.10+
 - **Docker Compose**: 2.0+
 - **Git**: For cloning the repository
 - **Make**: For running build commands (optional)
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Clone the Repository
 ```bash
@@ -138,7 +138,7 @@ make test-coverage
 make test-persistence
 ```
 
-## 🔧 Development
+## Development
 
 ### Available Make Commands
 ```bash
@@ -206,7 +206,7 @@ curl http://localhost:8080/api/v1/books
 curl http://localhost:8080/api/v1/books/{uuid}
 ```
 
-## 🚀 Production Deployment
+## Production Deployment
 
 ### 1. Configure Environment
 ```bash
@@ -241,7 +241,7 @@ docker-compose -f docker-compose.prod.yml up -d --scale backend=3
 - **Database**: Connection and query validation  
 - **Container**: Docker health check configurations
 
-## 🔒 Security Features
+## Security Features
 
 ### Authentication & Authorization
 - **API Key Authentication**: Configurable API keys for production
@@ -259,7 +259,7 @@ docker-compose -f docker-compose.prod.yml up -d --scale backend=3
 - **SQL Injection Prevention**: Parameterized queries with sqlx
 - **Input Validation**: Comprehensive request validation
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 byfood-project/
@@ -289,7 +289,7 @@ byfood-project/
 └── README.md                 # This file
 ```
 
-## 🤝 Contributing
+## Contributing
 
 1. **Fork the Repository**
 2. **Create Feature Branch**: `git checkout -b feature/amazing-feature`
@@ -304,22 +304,22 @@ byfood-project/
 - Use meaningful commit messages
 - Ensure all tests pass before submitting PR
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) file for details.
 
-## 🏆 Achievements
+## Achievements
 
-- ✅ **Clean Architecture**: Proper separation of concerns
-- ✅ **56.2% Test Coverage**: Comprehensive testing suite
-- ✅ **Production Ready**: Docker, monitoring, security
-- ✅ **API Documentation**: Complete Swagger documentation
-- ✅ **Data Persistence**: Verified across container restarts
-- ✅ **Performance Optimized**: Efficient queries and caching
-- ✅ **Security Hardened**: Multiple security layers
-- ✅ **Monitoring**: Prometheus metrics and health checks
+- **Clean Architecture**: Proper separation of concerns
+- **56.2% Test Coverage**: Comprehensive testing suite
+- **Production Ready**: Docker, monitoring, security
+- **API Documentation**: Complete Swagger documentation
+- **Data Persistence**: Verified across container restarts
+- **Performance Optimized**: Efficient queries and caching
+- **Security Hardened**: Multiple security layers
+- **Monitoring**: Prometheus metrics and health checks
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **Clean Architecture** principles by Robert C. Martin
 - **Echo Framework** for Go web development

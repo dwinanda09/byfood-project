@@ -50,3 +50,5 @@ backend/coverage.html
 
 # Docker
 .docker/
+
+vendor/

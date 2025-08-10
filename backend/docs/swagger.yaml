@@ -4,33 +4,16 @@ definitions:
     properties:
       author:
         type: string
-        description: Author of the book
-        example: "Alan Donovan, Brian Kernighan"
       created_at:
         type: string
-        format: date-time
-        description: When the book record was created
-        example: "2024-08-07T10:30:00Z"
       id:
         type: string
-        format: uuid
-        description: Unique identifier for the book
-        example: "123e4567-e89b-12d3-a456-426614174000"
       title:
         type: string
-        description: Title of the book
-        example: "The Go Programming Language"
       updated_at:
         type: string
-        format: date-time
-        description: When the book record was last updated
-        example: "2024-08-07T10:30:00Z"
       year:
         type: integer
-        description: Publication year
-        example: 2015
-        minimum: 1000
-        maximum: 2034
     type: object
   entities.CreateBookDTO:
     properties:
@@ -39,7 +22,13 @@ definitions:
       title:
         type: string
       year:
+        maximum: 2034
+        minimum: 1000
         type: integer
+    required:
+    - author
+    - title
+    - year
     type: object
   entities.UpdateBookDTO:
     properties:
@@ -48,7 +37,13 @@ definitions:
       title:
         type: string
       year:
+        maximum: 2034
+        minimum: 1000
         type: integer
+    required:
+    - author
+    - title
+    - year
     type: object
   handlers.ErrorResponse:
     properties:
@@ -65,15 +60,10 @@ definitions:
     type: object
 host: localhost:8080
 info:
-  contact:
-    name: byFood Development Team
-    email: dev@byfood.com
-  description: A comprehensive library management system built with Clean Architecture, Echo framework, and UUID support. Provides full CRUD operations for book management with persistent storage and request tracing.
-  title: byFood Library Management System API
-  version: "1.0.0"
-  license:
-    name: MIT
-    url: https://opensource.org/licenses/MIT
+  contact: {}
+  description: A simple book library management API with UUID support and Echo framework
+  title: Book Library API
+  version: "1.0"
 paths:
   /books:
     get:
@@ -228,4 +218,23 @@ paths:
       summary: Update a book
       tags:
       - books
+  /process-url:
+    post:
+      consumes:
+      - application/json
+      description: Process a URL for various operations
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.SuccessResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handlers.ErrorResponse'
+      summary: Process URL
+      tags:
+      - utils
 swagger: "2.0"

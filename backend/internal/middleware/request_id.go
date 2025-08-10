@@ -8,8 +8,6 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
-const RequestIDKey = "request_id"
-
 // RequestID middleware generates a unique request ID for each request
 func RequestID() echo.MiddlewareFunc {
 	return middleware.RequestIDWithConfig(middleware.RequestIDConfig{

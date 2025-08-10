@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 	"strings"
-	"time"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -13,14 +12,14 @@ import (
 )
 
 type SecurityConfig struct {
-	APIKeyHeader     string
-	AllowedAPIKeys   []string
-	RateLimitRPS     int
-	RateLimitBurst   int
-	EnableAPIKey     bool
-	EnableRateLimit  bool
-	TrustedProxies   []string
-	MaxRequestSize   string
+	APIKeyHeader    string
+	AllowedAPIKeys  []string
+	RateLimitRPS    int
+	RateLimitBurst  int
+	EnableAPIKey    bool
+	EnableRateLimit bool
+	TrustedProxies  []string
+	MaxRequestSize  string
 }
 
 type SecurityMiddleware struct {
@@ -52,7 +51,7 @@ func (sm *SecurityMiddleware) SecurityHeaders() echo.MiddlewareFunc {
 			c.Response().Header().Set("X-XSS-Protection", "1; mode=block")
 			c.Response().Header().Set("Referrer-Policy", "strict-origin-when-cross-origin")
 			c.Response().Header().Set("Content-Security-Policy", "default-src 'self'")
-			
+
 			// HSTS header for HTTPS
 			if c.Request().TLS != nil {
 				c.Response().Header().Set("Strict-Transport-Security", "max-age=31536000; includeSubDomains")
@@ -60,7 +59,7 @@ func (sm *SecurityMiddleware) SecurityHeaders() echo.MiddlewareFunc {
 
 			// Remove server information
 			c.Response().Header().Set("Server", "")
-			
+
 			return next(c)
 		}
 	}

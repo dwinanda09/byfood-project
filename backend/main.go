@@ -45,7 +45,7 @@ func main() {
 	defer db.Close()
 
 	// Initialize Clean Architecture layers
-	bookRepo := repositories.NewPostgresBookRepository(db)
+	bookRepo := repositories.NewPostgresBookRepository(db,zap.L())
 	bookUseCase := usecases.NewBookUseCase(bookRepo, logger)
 	bookHandler := handlers.NewBookHandler(bookUseCase, logger)
 	urlHandler := handlers.NewURLHandler(logger)

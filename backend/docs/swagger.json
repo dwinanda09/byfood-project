@@ -239,6 +239,35 @@
                     }
                 }
             }
+        },
+        "/process-url": {
+            "post": {
+                "description": "Process a URL for various operations",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "utils"
+                ],
+                "summary": "Process URL",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.SuccessResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.ErrorResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -267,6 +296,11 @@
         },
         "entities.CreateBookDTO": {
             "type": "object",
+            "required": [
+                "author",
+                "title",
+                "year"
+            ],
             "properties": {
                 "author": {
                     "type": "string"
@@ -275,12 +309,19 @@
                     "type": "string"
                 },
                 "year": {
-                    "type": "integer"
+                    "type": "integer",
+                    "maximum": 2034,
+                    "minimum": 1000
                 }
             }
         },
         "entities.UpdateBookDTO": {
             "type": "object",
+            "required": [
+                "author",
+                "title",
+                "year"
+            ],
             "properties": {
                 "author": {
                     "type": "string"
@@ -289,7 +330,9 @@
                     "type": "string"
                 },
                 "year": {
-                    "type": "integer"
+                    "type": "integer",
+                    "maximum": 2034,
+                    "minimum": 1000
                 }
             }
         },

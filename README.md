@@ -175,7 +175,7 @@ make test-integration
 make test-persistence
 ```
 
-## 📖 API Documentation
+## API Documentation
 
 Complete API documentation is available via Swagger UI:
 - **Development**: http://localhost:8080/swagger/index.html
